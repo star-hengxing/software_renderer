@@ -25,7 +25,7 @@ void FPS()
     
     if(duration_cast<milliseconds>(current_time - last_time).count() > 1000)
     {
-        printf("FPS: %lld\n", fps);
+        std::cout << "FPS: " << fps << '\n';
         fps = 0;
         last_time = current_time;
     }

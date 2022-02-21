@@ -3,6 +3,7 @@
 #include <cassert>
 
 #include <source_location>
+#include <algorithm>
 #include <iostream>
 #include <limits>
 #include <chrono>
@@ -57,9 +58,10 @@ constexpr auto Enumerate(T& range, const usize step = 1) -> std::ranges::view au
 }
 
 template <std::ranges::range Container1, std::ranges::range Container2, std::copy_constructible Function>
-void map(const Container1& c1, Container2& c2, Function f)
+void map(const Container1& src, Container2& dst, Function f)
 {
-	std::ranges::copy(std::views::transform(c1, f), c2.begin());
+	std::ranges::transform(src.begin(), src.end(), dst.begin(), f);
+	// std::ranges::copy(std::views::transform(src, f), dst.begin());
 }
 
 using namespace std::chrono;
