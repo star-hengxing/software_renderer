@@ -36,8 +36,8 @@ bool clip_spacae_culling(const Point4f& a, const Point4f& b, const Point4f& c, f
 
 bool back_face_culling(const Vector3f& a, const Vector3f& b, const Vector3f& c)
 {
-    const Vector3f edge1 = b - a;
-    const Vector3f edge2 = c - a;
-    const Vector3f normal = cross(edge1, edge2);
-    return dot(-a, normal) >= 0;
+    // NDC space, negative z
+    const Vector2f edge1 = cast<Vector2>(b) - cast<Vector2>(a);
+    const Vector2f edge2 = cast<Vector2>(c) - cast<Vector2>(a);
+    return cross(edge1, edge2) < 0;
 }
