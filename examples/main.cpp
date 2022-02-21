@@ -11,9 +11,8 @@ constexpr usize width = 700, height = 700;
 
 int main(int argc, char const *argv[])
 {
-    Point3f pos{0, -40, 40};
     auto camera = Camera{}
-        .set_pos(pos)
+        .set_pos(Point3f{0, -40, 40})
         .set_at(Point3f{0, 0, 0})
         .set_up(Vector3f{0, 1, 0})
         .set_aspect(width / height)
@@ -40,6 +39,7 @@ int main(int argc, char const *argv[])
     i32 key = 0;
     f32 degree = 30;
     f32 scale = 1;
+    Point3f& pos = camera.pos;
 
     bool run = true;
     while(run)
@@ -53,8 +53,8 @@ int main(int argc, char const *argv[])
             case 'w': pos.z  -= 0.1f; break;
             case 's': pos.z  += 0.1f; break;
             
-            case 'z': scale  += 0.01f; break;
-            case 'x': scale  -= 0.01f; break;
+            case '=': scale  += 0.01f; break;
+            case '-': scale  -= 0.01f; break;
 
             case 27:
             case 'q':
@@ -63,7 +63,6 @@ int main(int argc, char const *argv[])
             default:
                 break;
         }
-        camera.set_pos(pos);
         renderer.set_view(camera.look_at());
         renderer.set_model(Transform<f32>::scale(scale) * Transform<f32>::rotate<Axis::Y>(degree));
         renderer.draw();

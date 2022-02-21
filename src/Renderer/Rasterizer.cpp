@@ -57,6 +57,18 @@ void Rasterizer::clean_depth_buffer()
     depth_buffer.fill(-INFINITY_<f32>);
 }
 
+static std::tuple<usize, usize, usize, usize>
+bounding_box(const Trianglef& t)
+{
+    return
+    {
+        static_cast<usize>(std::floor(min(t.A.x, t.B.x, t.C.x))),
+        static_cast<usize>(std::ceil (max(t.A.x, t.B.x, t.C.x))),
+        static_cast<usize>(std::floor(min(t.A.y, t.B.y, t.C.y))),
+        static_cast<usize>(std::ceil (max(t.A.y, t.B.y, t.C.y)))
+    };
+}
+
 void Rasterizer::draw()
 {
     const Matrix4f mv     = view * model;
@@ -106,10 +118,7 @@ void Rasterizer::draw()
 void Rasterizer::draw_triangle(const Triangle_payload& tp)
 {
     const Triangle t{cast<Point3>(tp.A.p), cast<Point3>(tp.B.p), cast<Point3>(tp.C.p)};
-    const auto min_x = static_cast<usize>(std::floor(min(t.A.x, t.B.x, t.C.x)));
-    const auto max_x = static_cast<usize>(std::ceil (max(t.A.x, t.B.x, t.C.x)));
-    const auto min_y = static_cast<usize>(std::floor(min(t.A.y, t.B.y, t.C.y)));
-    const auto max_y = static_cast<usize>(std::ceil (max(t.A.y, t.B.y, t.C.y)));
+    const auto [min_x, max_x, min_y, max_y] = bounding_box(t);
 
     for(usize y : range(min_y, max_y))
     {

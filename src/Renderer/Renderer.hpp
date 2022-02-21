@@ -37,7 +37,7 @@ protected:
     std::vector<Point4f> clip_vertics;
 
 public:
-    Renderer() = default;
+    Renderer() = delete;
 
     Renderer(usize width, usize height, Camera& camera);
 
