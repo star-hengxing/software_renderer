@@ -73,7 +73,7 @@ void Rasterizer::draw()
 {
     const Matrix4f mv     = view * model;
     const Matrix4f mvp    = projection * mv;
-    const Matrix4f inv_mv = mv.inverse().transpose();
+    const Matrix4f inv_mv = mv.adjugate().transpose();
 
     map(vertex, clip_vertics, [&](const Point3f& p) -> Point4f { return mvp * Point4f{p}; });
 
@@ -103,7 +103,7 @@ void Rasterizer::draw()
         for(const auto&& [i, value] : Enumerate(clip))
         {
             tp[i].p      = value;
-            tp[i].n      = inv_mv * vertex_normal[face[i].normal];
+            tp[i].n      = inv_mv * vertex_normal[face[i].normal].normalized();
             tp[i].view_p = cast<Point3>(mv * Point4f{vertex[face[i].point]});
             if(payload.texture)
             {

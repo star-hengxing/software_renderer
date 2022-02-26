@@ -24,7 +24,7 @@ std::optional<Mesh> Mesh::read(std::string_view obj_path, std::string_view textu
             return {};
         }
     }
-    return std::move(mesh);
+    return std::make_optional<Mesh>(std::move(mesh));
 }
 
 bool Mesh::load_obj(std::string_view filename)
