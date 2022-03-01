@@ -1,16 +1,10 @@
 #pragma once
 
-#include <cassert>
-
 #include <source_location>
 #include <algorithm>
 #include <iostream>
-#include <limits>
 #include <chrono>
 #include <ranges>
-
-#include <Hinae/Vector3.hpp>
-#include <Image/Color.hpp>
 
 #ifndef NAMESPACE_BEGIN
 #define NAMESPACE_BEGIN(name) namespace name {
@@ -26,10 +20,13 @@
 #define dbg(expr) std::cout<< '[' << std::source_location::current().file_name() << ':'<< std::source_location::current().line() << "] " << #expr << " = " << expr << '\n';
 #endif // NDEBUG
 
+using usize = std::size_t;
+using f64 	= double;
+
 template <std::integral T>
 constexpr auto range(T end)
 {
-	return std::views::iota(ZERO<T>, end);
+	return std::views::iota(static_cast<T>(0), end);
 }
 
 template <std::integral T>
@@ -100,38 +97,17 @@ public:
 	}
 };
 
-template <std::ranges::range T>
-void println(const T& args)
+template <typename T, typename... Ts>
+void println(const T& arg, const Ts&... args)
 {
-    for(const auto& v : args)
-    {
-        std::cout << v << ' ';
-    }
-    std::cout << '\n';
+	std::cout << arg;
+    ((std::cout << '\n' << args), ...);
 }
-
-template <std::ranges::range... Ts>
-void print(Ts... args)
+template <typename T, typename... Ts>
+void print(const T& arg, const Ts&... args)
 {
-    (println(args), ...);
-}
-
-template <typename... Ts>
-void println(Ts... args)
-{
-    ((std::cout << args << '\n'), ...);
-}
-
-template <typename... Ts>
-void print(Ts... args)
-{
-    ((std::cout << args << ' '), ...);
+ 	std::cout << arg;
+    ((std::cout << ' ' << args), ...);
 }
 
 void FPS();
-
-u8 f32_to_rgb(f32 f);
-
-Color float_to_rgb(const Vector3f& c);
-
-Vector3f rgb_to_float(const Color& c);

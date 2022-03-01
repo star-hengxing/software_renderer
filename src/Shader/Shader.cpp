@@ -2,9 +2,11 @@
 
 #include <array>
 
+#include <Hinae/coordinate_system.hpp>
 #include <Hinae/Transform.hpp>
 
 #include <Texture/Texture.hpp>
+#include <Image/Color.hpp>
 #include <util/util.hpp>
 
 struct Light
@@ -113,7 +115,7 @@ void bump_shader(Payload& payload)
 
 void displacement_shader(Payload& payload)
 {
-    const Vector3f kd = rgb_to_float(Color{148, 121, 92});
+    const Vector3f kd = rgb_to_float<f32>(Color{148, 121, 92});
     const auto [normal, huv] = bump(payload);
     const Point3f pos = payload.view_point + (kn * normal * huv);
     payload.pixel_color = float_to_rgb(blinn_phong(pos, normal, kd));

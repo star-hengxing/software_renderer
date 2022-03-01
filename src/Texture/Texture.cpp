@@ -15,7 +15,7 @@ Colorf get_color(const Image& texture, const Point2f& uv, State state)
 
     if(state == State::Standard)
     {
-        return rgb_to_float(texture[static_cast<usize>(u)][static_cast<usize>(v)]);
+        return rgb_to_float<f32>(texture[static_cast<usize>(u)][static_cast<usize>(v)]);
     }
     else if(state == State::Bilinear)
     {
@@ -24,10 +24,10 @@ Colorf get_color(const Image& texture, const Point2f& uv, State state)
         const auto v_min = static_cast<usize>(std::floor(v));
         const auto v_max = static_cast<usize>(std::ceil(v));
 
-        const Colorf p1 = rgb_to_float(texture[u_min][v_max]);
-        const Colorf p2 = rgb_to_float(texture[u_max][v_max]);
-        const Colorf p3 = rgb_to_float(texture[u_min][v_min]);
-        const Colorf p4 = rgb_to_float(texture[u_max][v_min]);
+        const Colorf p1 = rgb_to_float<f32>(texture[u_min][v_max]);
+        const Colorf p2 = rgb_to_float<f32>(texture[u_max][v_max]);
+        const Colorf p3 = rgb_to_float<f32>(texture[u_min][v_min]);
+        const Colorf p4 = rgb_to_float<f32>(texture[u_max][v_min]);
 
         const f32 s = u - u_min;
         const f32 t = v - v_min;

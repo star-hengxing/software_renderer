@@ -1,5 +1,9 @@
 #include "post_process.hpp"
 
+#include <Hinae/Vector3.hpp>
+
+using namespace Hinae;
+
 #include <util/util.hpp>
 
 Buffer2D<Color> SSAA(usize size, const Buffer2D<Color>& frame)
@@ -15,7 +19,7 @@ Buffer2D<Color> SSAA(usize size, const Buffer2D<Color>& frame)
             {
                 for(usize i : range(size))
                 {
-                    color += rgb_to_float(frame[x * size + i][y * size + j]);
+                    color += rgb_to_float<f32>(frame[x * size + i][y * size + j]);
                 }
             }
             buffer[x][y] = float_to_rgb(color / static_cast<f32>(size * size));
