@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Hinae/Point2.hpp>
+
 #include "Renderer.hpp"
 
 class Wireframe : public Renderer

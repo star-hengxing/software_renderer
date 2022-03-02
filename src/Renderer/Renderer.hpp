@@ -2,7 +2,6 @@
 
 #include <vector>
 
-#include <Hinae/Triangle.hpp>
 #include <Hinae/Matrix4.hpp>
 #include <Hinae/Point4.hpp>
 

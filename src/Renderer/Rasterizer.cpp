@@ -4,8 +4,11 @@
 
 #include <Hinae/Transform.hpp>
 
+#include <Mesh/Triangle.hpp>
 #include <util/util.hpp>
 #include <Clip/Clip.hpp>
+
+using Trianglef = Triangle<f32>;
 
 Rasterizer::Rasterizer(usize width, usize height, Camera& camera) :
     Renderer(width, height, camera)
@@ -88,7 +91,7 @@ void Rasterizer::draw()
         
         if(!clip_spacae_culling(clip[0], clip[1], clip[2], camera.z_near))
             continue;
-        if(back_face_culling(cast<Vector3>(clip[0]), cast<Vector3>(clip[1]), cast<Vector3>(clip[2])))
+        if(back_face_culling(as<Vector3, f32>(clip[0]), as<Vector3, f32>(clip[1]), as<Vector3, f32>(clip[2])))
             continue;
 
         for(auto& p : clip)
@@ -104,7 +107,7 @@ void Rasterizer::draw()
         {
             tp[i].p      = value;
             tp[i].n      = inv_mv * vertex_normal[face[i].normal].normalized();
-            tp[i].view_p = cast<Point3>(mv * Point4f{vertex[face[i].point]});
+            tp[i].view_p = as<Point3, f32>(mv * Point4f{vertex[face[i].point]});
             if(payload.texture)
             {
                 tp[i].uv = texture_uv[face[i].uv];
@@ -117,7 +120,7 @@ void Rasterizer::draw()
 
 void Rasterizer::draw_triangle(const Triangle_payload& tp)
 {
-    const Triangle t{cast<Point3>(tp.A.p), cast<Point3>(tp.B.p), cast<Point3>(tp.C.p)};
+    const Triangle t{as<Point3, f32>(tp.A.p), as<Point3, f32>(tp.B.p), as<Point3, f32>(tp.C.p)};
     const auto [min_x, max_x, min_y, max_y] = bounding_box(t);
 
     for(usize y : range(min_y, max_y))
