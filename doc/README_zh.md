@@ -29,12 +29,9 @@ xmake会自动探测当前系统和编译工具，linux还好，如果是windows
 依赖的包，xmake会自动下载
 
 ```shell
-mkdir cg
-cd cg
-git clone https://github.com/star-hengxing/Hinae
-git clone https://github.com/star-hengxing/software_renderer
+git clone --recursive https://github.com/star-hengxing/software_renderer
 cd software_renderer
-xmake build -w main
+xmake build main
 xmake run main
 ```
 如果成功构建，你可以看到一只兔子出现在你屏幕上。按*J*和*K*键旋转兔子

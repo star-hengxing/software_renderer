@@ -6,7 +6,7 @@ add_requires("libsdl")
 add_requires("stb")
 
 add_packages("libsdl")
-add_includedirs("../Hinae/include")
+add_includedirs("Hinae/include")
 add_includedirs("src")
 
 if is_mode("release") then

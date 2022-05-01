@@ -30,12 +30,9 @@ Install dependencies:
 then
 
 ```shell
-mkdir cg
-cd cg
-git clone https://github.com/star-hengxing/Hinae
-git clone https://github.com/star-hengxing/software_renderer
+git clone --recursive https://github.com/star-hengxing/software_renderer
 cd software_renderer
-xmake build -w main
+xmake build main
 xmake run main
 ```
 
