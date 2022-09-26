@@ -2,21 +2,14 @@ set_project("software_renderer")
 
 add_rules("mode.debug", "mode.release", "mode.profile")
 
-add_requires("libsdl")
-add_requires("stb")
+add_requires("libsdl 2.0.20")
+add_requires("stb 2021.09.10")
 
 add_packages("libsdl")
 add_includedirs("Hinae/include")
 add_includedirs("src")
 
-if is_mode("release") then
-    add_rules("c++.unity_build")
-    if is_plat("windows") then
-        add_ldflags("/LTCG")
-    end
-end
-
-set_languages("cxxlatest")
+set_languages("cxx20")
 
 add_vectorexts("sse", "sse2", "sse3", "ssse3")
 
