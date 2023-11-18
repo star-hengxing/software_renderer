@@ -1,9 +1,11 @@
 set_project("software_renderer")
 
+set_xmakever("2.8.5")
+
 add_rules("mode.debug", "mode.release", "mode.profile")
 
-add_requires("libsdl 2.0.20")
-add_requires("stb 2021.09.10")
+add_requires("libsdl")
+add_requires("stb")
 
 add_packages("libsdl")
 add_includedirs("Hinae/include")
@@ -17,7 +19,7 @@ set_warnings("all")
 
 if is_plat("windows") then
     add_defines("_CRT_SECURE_NO_WARNINGS")
-    add_cxflags("/utf-8")
+    set_encodings("utf-8")
 end
 
 set_rundir("$(projectdir)")
