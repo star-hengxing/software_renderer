@@ -4,8 +4,10 @@ set_xmakever("2.8.5")
 
 add_rules("mode.debug", "mode.release", "mode.profile")
 
-add_requires("libsdl")
+add_requires("libsdl", {configs = {sdlmain = false}})
 add_requires("stb")
+
+set_policy("package.requires_lock", true)
 
 add_packages("libsdl")
 add_includedirs("Hinae/include")

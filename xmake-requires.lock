@@ -1,0 +1,31 @@
+{
+    __meta__ = {
+        version = "1.0"
+    },
+    ["windows|x64"] = {
+        ["cmake#31fecfc4"] = {
+            repo = {
+                branch = "master",
+                commit = "ffe2f8f8e5477d85db4dda346cd137aaaed01a3c",
+                url = "https://gitee.com/tboox/xmake-repo.git"
+            },
+            version = "3.28.3"
+        },
+        ["libsdl#6f7d2e97"] = {
+            repo = {
+                branch = "master",
+                commit = "ffe2f8f8e5477d85db4dda346cd137aaaed01a3c",
+                url = "https://gitee.com/tboox/xmake-repo.git"
+            },
+            version = "2.30.0"
+        },
+        ["stb#31fecfc4"] = {
+            repo = {
+                branch = "master",
+                commit = "ffe2f8f8e5477d85db4dda346cd137aaaed01a3c",
+                url = "https://gitee.com/tboox/xmake-repo.git"
+            },
+            version = "2023.12.15"
+        }
+    }
+}
